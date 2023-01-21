@@ -1,14 +1,21 @@
 import './index.scss';
+import './styles/global-styles.scss';
 
-import React from 'react';
+import React, { StrictMode, Suspense } from 'react';
 
-import ReactDOM from 'react-dom';
+import { createRoot } from 'react-dom/client';
+import { BrowserRouter } from 'react-router-dom';
 
-import App from './App';
+import AppRoutes from './routes/Routes';
+const rootElement = document.getElementById('root') as HTMLElement;
+const root = createRoot(rootElement);
 
-ReactDOM.render(
-  <React.StrictMode>
-    <App />
-  </React.StrictMode>,
-  document.getElementById('root'),
+root.render(
+  <StrictMode>
+    <Suspense fallback="">
+      <BrowserRouter>
+        <AppRoutes />
+      </BrowserRouter>
+    </Suspense>
+  </StrictMode>,
 );

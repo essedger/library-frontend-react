@@ -1,2 +1,4 @@
-# library-frontend-react
-Library frontend
+# Library Frontend
+
+Vite + React + Typescript + Eslint + Prettier
+

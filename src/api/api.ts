@@ -1,11 +1,11 @@
-import axios, { AxiosRequestConfig, AxiosResponse } from 'axios';
+import axios, { AxiosRequestConfig, AxiosResponse } from "axios";
 
-import { setupInterceptorsTo } from './interceptors';
+import { setupInterceptorsTo } from "./interceptors";
 
 const getBaseUrl = () => {
-  return process.env.NODE_ENV === 'development'
-    ? `http://localhost:4000/api/`
-    : `${window.location.origin}/api/`;
+  return process.env.NODE_ENV === "development"
+    ? `http://localhost:4000/api/v1/`
+    : `${window.location.origin}/api/v1/`;
 };
 
 const getInstance = () => {
@@ -15,9 +15,9 @@ const getInstance = () => {
       // baseURL: 'http://localhost:4000/api/',
       timeout: 25000,
       headers: {
-        'Content-Type': 'application/json',
+        "Content-Type": "application/json",
       },
-    }),
+    })
   );
 };
 
@@ -27,31 +27,33 @@ const API = () => {
     get: <P, R>(
       url: string,
       config?: AxiosRequestConfig,
-      params?: P,
+      params?: P
     ): Promise<AxiosResponse<any> | R> =>
-      instance.get(url, { params, responseType: 'json', ...config }).then((data) => data),
+      instance
+        .get(url, { params, responseType: "json", ...config })
+        .then((data) => data),
     post: <D, R>(
       url: string,
       payload?: D,
-      config?: AxiosRequestConfig,
+      config?: AxiosRequestConfig
     ): Promise<AxiosResponse<any> | R> =>
       instance.post(url, payload, config).then((data) => data),
     patch: <D, R>(
       url: string,
       payload: D,
-      config?: AxiosRequestConfig,
+      config?: AxiosRequestConfig
     ): Promise<AxiosResponse<any> | R> =>
       instance.patch(url, payload, config).then((data) => data),
     put: <D, R>(
       url: string,
       payload?: D,
-      config?: AxiosRequestConfig,
+      config?: AxiosRequestConfig
     ): Promise<AxiosResponse<any> | R> =>
       instance.put(url, payload, config).then((data) => data),
     delete: <D, R>(
       url: string,
       payload?: D,
-      config?: AxiosRequestConfig,
+      config?: AxiosRequestConfig
     ): Promise<AxiosResponse<any> | R> =>
       instance.delete(url, { ...config, data: payload }).then((data) => data),
   };

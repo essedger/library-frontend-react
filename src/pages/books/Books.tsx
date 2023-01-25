@@ -1,15 +1,16 @@
-import { useEffect, useState } from 'react';
+import { useEffect, useState } from "react";
 
-import { onGetBooks } from '../../api/requests/books';
-import BookCard from '../../components/bookCard/BookCard';
-import './styles.scss';
-import { Book } from '../../types/entities/book';
+import { onGetBooks } from "../../api/requests/books";
+import BookCard from "../../components/bookCard/BookCard";
+import { Book } from "../../types/data-contracts";
+import "./styles.scss";
+
 function Books() {
   const [books, setBooks] = useState([]);
   useEffect(() => {
     async function getBooks() {
       const items = await onGetBooks();
-      setBooks(items?.data?.books);
+      setBooks(items?.data);
     }
     getBooks();
   }, []);

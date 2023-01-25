@@ -1,8 +1,8 @@
-import { Card } from 'antd';
-import Meta from 'antd/lib/card/Meta';
+import { Card } from "antd";
+import Meta from "antd/lib/card/Meta";
 
-import './styles.scss';
-import { Book } from '../../types/entities/book';
+import "./styles.scss";
+import { Book } from "../../types/data-contracts";
 
 const BookCard = ({ image, name, author, id }: Book) => {
   return (

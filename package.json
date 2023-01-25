@@ -8,7 +8,8 @@
     "lint:fix": "eslint ./src --ext .jsx,.js,.ts,.tsx --quiet --fix --ignore-path ./.gitignore",
     "lint:format": "prettier  --loglevel warn --write \"./**/*.{js,jsx,ts,tsx,css,md,json}\" ",
     "lint": "yarn lint:format && yarn lint:fix ",
-    "type-check": "tsc"
+    "type-check": "tsc",
+    "open-api-generate": "npx swagger-typescript-api -p http://127.0.0.1:4000/api/1/swagger.json -o ./src/types --modular"
   },
   "dependencies": {
     "antd": "^5.1.6",

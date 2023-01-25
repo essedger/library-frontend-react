@@ -1,5 +1,7 @@
 import { useEffect, useState } from "react";
 
+import { Col, Row } from "antd";
+
 import { onGetBooks } from "../../api/requests/books";
 import BookCard from "../../components/bookCard/BookCard";
 import { Book } from "../../types/data-contracts";
@@ -15,15 +17,19 @@ function Books() {
     getBooks();
   }, []);
   return (
-    <div className="books">
-      {books?.map((book: Book) => (
-        <BookCard
-          image={book?.image}
-          author={book?.author}
-          id={book?.id}
-          name={book?.name}
-        />
-      ))}
+    <div className="books-page">
+      <Row gutter={[16, 16]}>
+        {books?.map((book: Book) => (
+          <Col>
+            <BookCard
+              image={book?.image}
+              author={book?.author}
+              id={book?.id}
+              name={book?.name}
+            />
+          </Col>
+        ))}
+      </Row>
     </div>
   );
 }

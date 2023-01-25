@@ -1,14 +1,12 @@
-import { IAuthInfo } from 'store/auth/interfaces';
-
-const AUTH_DATA = 'ccm:auth_data;';
+const AUTH_DATA = "auth_data;";
 
 export const localStorageService = {
-  setAuthData: (authInfo: IAuthInfo): void => {
+  setAuthData: (authInfo: any): void => {
     localStorage.setItem(AUTH_DATA, JSON.stringify(authInfo));
   },
-  getAuthData: (): IAuthInfo | null => {
+  getAuthData: (): any => {
     const data = localStorage.getItem(AUTH_DATA);
-    if (data && data !== 'undefined') {
+    if (data && data !== "undefined") {
       return JSON.parse(data);
     }
     return null;

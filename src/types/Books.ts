@@ -12,7 +12,9 @@
 import { Book } from "./data-contracts";
 import { HttpClient, RequestParams } from "./http-client";
 
-export class Books<SecurityDataType = unknown> extends HttpClient<SecurityDataType> {
+export class Books<
+  SecurityDataType = unknown
+> extends HttpClient<SecurityDataType> {
   /**
    * No description
    *

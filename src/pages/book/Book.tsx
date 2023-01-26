@@ -8,7 +8,7 @@ import { Book } from "../../types/data-contracts";
 const BookPage = () => {
   const routeParams = useParams();
   const [book, setBook] = useState<Book>();
-  console.log(routeParams);
+
   useEffect(() => {
     async function getBooks() {
       if (routeParams?.id) {

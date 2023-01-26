@@ -1,10 +1,15 @@
-import { AxiosError, AxiosInstance, AxiosRequestConfig, AxiosResponse } from 'axios';
-import { message } from 'antd';
+import {
+  AxiosError,
+  AxiosInstance,
+  AxiosRequestConfig,
+  AxiosResponse,
+} from "axios";
+import { message } from "antd";
 
-import { messageDurability } from '../constants';
-import { NotificationType } from '../types/entities';
-import notificationService from '../services/notificationService';
-import { localStorageService } from '../services/localStorageService';
+import { messageDurability } from "../constants";
+import { NotificationType } from "../types/entities";
+import notificationService from "../services/notificationService";
+import { localStorageService } from "../services/localStorageService";
 
 const onRequest = (config: AxiosRequestConfig): AxiosRequestConfig => {
   const authData = localStorageService.getAuthData();
@@ -16,10 +21,12 @@ const onRequest = (config: AxiosRequestConfig): AxiosRequestConfig => {
   return config;
 };
 
-const onRequestError = async (error: AxiosError): Promise<AxiosResponse<any, any>> => {
+const onRequestError = async (
+  error: AxiosError
+): Promise<AxiosResponse<any, any>> => {
   const notification = {
     type: NotificationType.error,
-    description: `${error.response?.data || 'Something went wrond'}`,
+    description: `${error.response?.data || "Something went wrond"}`,
   };
   notificationService.show(notification);
 
@@ -30,12 +37,16 @@ const onResponse = (response: AxiosResponse): AxiosResponse => {
   return response?.data;
 };
 
-const onResponseError = async (error: AxiosError): Promise<AxiosResponse<any, any>> => {
-  message.error('Something went wrong', messageDurability);
+const onResponseError = async (
+  error: AxiosError
+): Promise<AxiosResponse<any, any>> => {
+  message.error("Something went wrong", messageDurability);
   return Promise.reject(error.response);
 };
 
-export const setupInterceptorsTo = (axiosInstance: AxiosInstance): AxiosInstance => {
+export const setupInterceptorsTo = (
+  axiosInstance: AxiosInstance
+): AxiosInstance => {
   // axiosInstance.interceptors.request.use(onRequest, onRequestError);
   // axiosInstance.interceptors.response.use(onResponse, onResponseError);
   return axiosInstance;

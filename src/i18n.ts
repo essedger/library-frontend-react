@@ -1,7 +1,7 @@
-import i18n from 'i18next';
-import { initReactI18next } from 'react-i18next';
-import Backend from 'i18next-http-backend';
-import LanguageDetector from 'i18next-browser-languagedetector';
+import i18n from "i18next";
+import { initReactI18next } from "react-i18next";
+import Backend from "i18next-http-backend";
+import LanguageDetector from "i18next-browser-languagedetector";
 
 // const currentLanguage = 'ru';
 const options = {
@@ -18,7 +18,7 @@ const options = {
   initImmediate: false,
   backend: {
     requestOptions: {
-      cache: 'no-store' as RequestCache,
+      cache: "no-store" as RequestCache,
     },
   },
 };

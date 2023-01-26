@@ -5,7 +5,7 @@ import { Routes, Route } from "react-router-dom";
 import BookPage from "../pages/book/Book";
 import Login from "../pages/login/Login";
 import Books from "../pages/books/Books";
-import Layout from "../pages/layout/Layout";
+import Layout from "../components/layout/Layout";
 import NoMatch from "../pages/noMatch/NoMatch";
 
 import { PATH_NAMES } from "./constants";

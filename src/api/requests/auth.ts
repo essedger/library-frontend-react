@@ -1,5 +1,5 @@
-import API from 'api/api';
-import { ENDPOINTS } from 'api/constants';
+import API from "api/api";
+import { ENDPOINTS } from "api/constants";
 
 type LoginPayload = {
   email: string;

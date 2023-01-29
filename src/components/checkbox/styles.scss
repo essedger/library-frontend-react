@@ -1,0 +1,8 @@
+@import "src/styles/variables";
+@import "src/styles/mixins";
+
+$name: 'lib-checkbox';
+$group: 'lib-checkbox-group';
+
+.#{$name},
+.#{$group} {}

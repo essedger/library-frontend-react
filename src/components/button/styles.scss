@@ -1,0 +1,7 @@
+@import 'src/styles/variables';
+@import 'src/styles/mixins';
+
+$name: 'lib-button';
+.#{$name} {
+  border-radius: 16px;
+}

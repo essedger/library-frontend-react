@@ -7,6 +7,10 @@ export const PATH_NAMES: Record<string, any> = {
   },
   book: {
     base: "/book/:id",
+    addBook: "/add",
+  },
+  add: {
+    base: "/add",
   },
   books: {
     base: "/books",

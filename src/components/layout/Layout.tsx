@@ -7,6 +7,7 @@ import {
   SolutionOutlined,
   CalendarOutlined,
   UserOutlined,
+  PlusOutlined,
 } from "@ant-design/icons";
 import type { MenuProps, MenuTheme } from "antd";
 import { Layout, Menu } from "antd";
@@ -34,11 +35,12 @@ function getItem(
 }
 
 const items: MenuItem[] = [
-  getItem("My books", "books", <SolutionOutlined />),
+  getItem("My Books", "books", <SolutionOutlined />),
   getItem("Favorites", "favorites", <BookOutlined />),
   getItem("In progress", "now", <PlayCircleOutlined />),
   getItem("Scheduled", "scheduled", <CalendarOutlined />),
   getItem("Profile", "profile", <UserOutlined />),
+  getItem("Add Book", "add", <PlusOutlined />),
 ];
 
 const LayoutComponent: React.FC = () => {

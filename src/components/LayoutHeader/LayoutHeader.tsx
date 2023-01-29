@@ -17,6 +17,7 @@ const LayoutHeader = ({ themeValue, onChangeTheme }: LayoutHeaderType) => {
   const onBackNavigate = () => {
     navigate(-1);
   };
+
   const className = cx("layout-header", {
     "layout-header__dark": themeValue === "dark",
     "layout-header__light": themeValue === "light",
@@ -38,6 +39,7 @@ const LayoutHeader = ({ themeValue, onChangeTheme }: LayoutHeaderType) => {
           unCheckedChildren="Light"
           className="mr_16"
         />
+        {/*<Button type="primary" onClick={onNewItemPageNavigate}>Add book</Button>*/}
         {/*<Avatar style={{backgroundColor: '#FFFFFF'}} icon={<UserOutlined style={{color: '#000000'}} />} />*/}
       </div>
     </div>

@@ -1,12 +1,17 @@
+@import "src/styles/mixins";
+@import "src/styles/variables";
+
 .main-layout {
   & .layout-content {
     padding: 32px;
     min-height: calc(100vh - 64px);
+    overflow-y: auto;
+    @include scrollSmall();
     &__light {
-      background: #ffffff33;
+      background: #ffffff;
     }
     &__dark {
-      background: #00152991;
+      background: #E9E9E9;
     }
   }
 }

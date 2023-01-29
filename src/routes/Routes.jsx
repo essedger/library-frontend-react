@@ -7,6 +7,7 @@ import Login from "../pages/login/Login";
 import Books from "../pages/books/Books";
 import Layout from "../components/layout/Layout";
 import NoMatch from "../pages/noMatch/NoMatch";
+import AddBookPage from "../pages/addBook/AddBook";
 
 import { PATH_NAMES } from "./constants";
 
@@ -17,6 +18,7 @@ function AppRoutes() {
         <Route index element={<Login />} />
         <Route path={PATH_NAMES.book.base} element={<BookPage />} />
         <Route path={PATH_NAMES.books.base} element={<Books />} />
+        <Route path={PATH_NAMES.add.base} element={<AddBookPage />} />
         <Route path="*" element={<NoMatch />} />
       </Route>
     </Routes>

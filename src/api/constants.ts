@@ -5,5 +5,6 @@ export const ENDPOINTS = {
   RESET_PASSWORD: "password-reset/",
   //Books
   BOOK: (bookId: string) => `/book/${bookId}/`,
+  ADD_ITEM: "book/",
   BOOKS: "books/",
 };

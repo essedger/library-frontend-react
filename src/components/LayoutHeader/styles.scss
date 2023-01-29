@@ -1,15 +1,17 @@
+@import "src/styles/variables";
+
 .layout-header {
   height: 64px;
   display: flex;
   align-items: center;
   justify-content: space-between;
   line-height: 64px;
-  background: #001529;
+  background: $blue1;
   padding: 0 16px 0 8px;
   &__light {
     background: #FFFFFF;
   }
   &__dark {
-    background: #001529;
+    background: $blue1;
   }
 }

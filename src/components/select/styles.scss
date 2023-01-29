@@ -1,0 +1,8 @@
+@import "src/styles/variables";
+@import "src/styles/mixins";
+
+$name: 'lib-select';
+
+.#{$name} {
+  //width: 100%;
+}

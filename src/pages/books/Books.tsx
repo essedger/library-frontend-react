@@ -10,14 +10,14 @@ import LoadingOverlay from "../../components/loadingOverlay";
 import Block from "../../components/block";
 
 function Books() {
-  const [books, setBooks] = useState([]);
+  const [books, setBooks] = useState<Book[]>([]);
   const [loading, setLoading] = useState<boolean>(false);
 
   useEffect(() => {
     async function getBooks() {
       setLoading(true);
       const items = await onGetBooks();
-      setBooks(items?.data);
+      setBooks(items?.data?.books);
       setLoading(false);
     }
     getBooks();

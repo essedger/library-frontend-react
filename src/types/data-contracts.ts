@@ -9,6 +9,12 @@
  * ---------------------------------------------------------------
  */
 
+export interface Books {
+  books?: Book[];
+  current_page?: number;
+  total_pages?: number;
+}
+
 export interface Book {
   /** The book identifier */
   id: number;

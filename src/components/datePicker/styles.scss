@@ -1,0 +1,11 @@
+@import "src/styles/variables";
+@import "src/styles/mixins";
+
+$name: 'library-date-picker';
+
+.#{$name} {
+  width: 100%;
+
+}
+
+

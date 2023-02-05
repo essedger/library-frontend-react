@@ -9,6 +9,7 @@
  * ---------------------------------------------------------------
  */
 
+import { Book } from "./data-contracts";
 import { HttpClient, RequestParams } from "./http-client";
 
 export class Book<
@@ -31,19 +32,6 @@ export class Book<
    * No description
    *
    * @tags book
-   * @name DeleteBook
-   * @request DELETE:/book/{book_id}/
-   */
-  deleteBook = (bookId: number, params: RequestParams = {}) =>
-    this.request<void, any>({
-      path: `/book/${bookId}/`,
-      method: "DELETE",
-      ...params,
-    });
-  /**
-   * No description
-   *
-   * @tags book
    * @name PutBook
    * @request PUT:/book/{book_id}/
    */
@@ -51,6 +39,19 @@ export class Book<
     this.request<void, any>({
       path: `/book/${bookId}/`,
       method: "PUT",
+      ...params,
+    });
+  /**
+   * No description
+   *
+   * @tags book
+   * @name DeleteBook
+   * @request DELETE:/book/{book_id}/
+   */
+  deleteBook = (bookId: number, params: RequestParams = {}) =>
+    this.request<void, any>({
+      path: `/book/${bookId}/`,
+      method: "DELETE",
       ...params,
     });
   /**

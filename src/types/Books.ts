@@ -9,7 +9,7 @@
  * ---------------------------------------------------------------
  */
 
-import { Book } from "./data-contracts";
+import { Books } from "./data-contracts";
 import { HttpClient, RequestParams } from "./http-client";
 
 export class Books<
@@ -23,7 +23,7 @@ export class Books<
    * @request GET:/books/
    */
   getBooks = (params: RequestParams = {}) =>
-    this.request<Book, any>({
+    this.request<Books, any>({
       path: `/books/`,
       method: "GET",
       format: "json",

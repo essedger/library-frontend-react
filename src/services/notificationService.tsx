@@ -1,5 +1,6 @@
-import { Notification } from "types/entities";
 import { notification } from "antd";
+
+import { Notification } from "../types/entities";
 
 const notificationService = {
   show(notificationProps: Notification): void {

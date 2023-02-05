@@ -1,46 +1,63 @@
+import { useState } from "react";
+
 import { Form, message } from "antd";
 
 import { onPostItem } from "../../api/requests/books";
-import { Book } from "../../types/data-contracts";
 import TextField from "../../components/textField";
 import Button from "../../components/button";
 import { ButtonTypesEnum } from "../../components/button/types";
 import { showMessage } from "../../components/message/message";
+import DatePicker from "../../components/datePicker";
+import Checkbox from "../../components/checkbox";
 import "./styles.scss";
+import { Book } from "../../types/data-contracts";
 
 const AddBookPage = () => {
   // const routeParams = useParams();
-  // const [book, setBook] = useState<Book>();
+  const [dateStart, setDateStart] = useState("");
+  const [dateEnd, setDateEnd] = useState("");
+  const [isFinished, setIsFinished] = useState(false);
+  const [scheduleDate, setScheduleDate] = useState("");
   const [messageApi, contextHolder] = message.useMessage();
   const [form] = Form.useForm();
-  // useEffect(() => {
-  //   async function getBooks() {
-  //     if (routeParams?.id) {
-  //       const items = await onGetBook(routeParams?.id);
-  //       setBook(items?.data?.[0]);
-  //     }
-  //   }
-  //   getBooks();
-  // }, [routeParams?.id]);
-  // "author": "F. Scott Fitzgerald",
-  //   "date_end": "Fri, 28 Feb 2020 00:00:00 GMT",
-  //   "date_start": "Sat, 01 Feb 2020 00:00:00 GMT",
-  //   "description": "A novel set in the new 2",
-  //   "device": "kindle",
-  //   "image": "https://edit.org/images/cat/book-covers-big-2019101610.jpg",
-  //   "is_read": "True",
-  //   "link": "https://www.amazon.com/Great-Gatsby-F-Scott-Fitzgerald/dp/0743273567",
-  //   "name": "The Great Gatsby 2",
-  //   "notes": "Good, but not my favorite 2",
-  //   "rating": 1,
-  //   "schedule": "1 month",
-  //   "source": "Amazon",
-  //   "type": "book"
+  const onChangeDateStart = (value: string) => {
+    if (value?.length) {
+      setDateStart(value);
+    } else {
+      setDateStart("");
+    }
+  };
+  const onChangeScheduleDate = (value: string) => {
+    if (value?.length) {
+      setScheduleDate(value);
+    } else {
+      setScheduleDate("");
+    }
+  };
+
+  const onChangeDateEnd = (value: string) => {
+    if (value?.length) {
+      setDateEnd(value);
+    } else {
+      setDateEnd("");
+    }
+  };
+  const onChangeIsFinished = () => {
+    setIsFinished(!isFinished);
+  };
+
   const onFormValuesChange = () => {};
   const onSubmit = async (values: Book) => {
-    console.log(values);
+    const sendValues = {
+      ...values,
+      date_start: dateStart,
+      date_end: dateEnd,
+      schedule: scheduleDate,
+      is_read: isFinished,
+    };
+    // console.warn(sendValues);
     try {
-      await onPostItem(values).then(() => {
+      await onPostItem(sendValues).then(() => {
         form.resetFields();
         showMessage({
           messageApi,
@@ -84,6 +101,35 @@ const AddBookPage = () => {
           label="Description"
           placeholder="Description"
         />
+        <DatePicker
+          name="date_start"
+          label="Start date"
+          placeholder="Start date"
+          onChange={onChangeDateStart}
+        />
+        <DatePicker
+          name="date_end"
+          label="Finish date"
+          placeholder="Finish date"
+          onChange={onChangeDateEnd}
+        />
+        <TextField name="device" label="Device" placeholder="Device" />
+        <TextField name="image" label="Image URL" placeholder="Image URL" />
+        <Checkbox
+          name="is_read"
+          label="Finished?"
+          onChange={onChangeIsFinished}
+          checked={isFinished}
+        />
+        <TextField name="link" label="Book link" placeholder="Book link" />
+        <DatePicker
+          name="schedule"
+          label="Schedule date"
+          placeholder="Schedule date"
+          onChange={onChangeScheduleDate}
+        />
+        <TextField name="source" label="Source" placeholder="Source" />
+        <TextField name="type" label="Type" placeholder="Type" />
         <TextField name="notes" label="Notes" placeholder="Notes" />
         <Form.Item>
           <Button htmlType="submit" type={ButtonTypesEnum.primary}>

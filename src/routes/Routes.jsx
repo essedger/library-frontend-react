@@ -16,8 +16,8 @@ function AppRoutes() {
     <Routes>
       <Route path="/" element={<Layout />}>
         <Route index element={<Login />} />
-        <Route path={PATH_NAMES.book.base} element={<BookPage />} />
         <Route path={PATH_NAMES.books.base} element={<Books />} />
+        <Route path={PATH_NAMES.book.base} element={<BookPage />} />
         <Route path={PATH_NAMES.add.base} element={<AddBookPage />} />
         <Route path="*" element={<NoMatch />} />
       </Route>

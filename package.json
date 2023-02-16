@@ -12,6 +12,7 @@
     "open-api-generate": "npx swagger-typescript-api -p http://127.0.0.1:4000/api/v1/swagger.json -o src/types --modular"
   },
   "dependencies": {
+    "@reduxjs/toolkit": "^1.9.2",
     "antd": "^5.1.6",
     "antd-dayjs-vite-plugin": "^1.2.2",
     "axios": "^1.2.3",
@@ -23,6 +24,7 @@
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
     "react-i18next": "^12.1.4",
+    "react-redux": "^8.0.5",
     "react-router": "^6.7.0",
     "react-router-dom": "^6.7.0"
   },

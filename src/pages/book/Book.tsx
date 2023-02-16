@@ -1,23 +1,30 @@
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
 
 import { useParams } from "react-router";
+import { useDispatch, useSelector } from "react-redux";
+import { message } from "antd";
 
-import { onGetBook } from "../../api/requests/books";
-import { Book } from "../../types/data-contracts";
+import { AppDispatch, RootState } from "../../store/store";
+import { fetchBookById, cleanBook } from "../../store/book";
 
 const BookPage = () => {
   const routeParams = useParams();
-  const [book, setBook] = useState<Book>();
+  const { book } = useSelector((state: RootState) => state.book);
+  const dispatch = useDispatch<AppDispatch>();
 
   useEffect(() => {
-    async function getBooks() {
+    try {
       if (routeParams?.id) {
-        const items = await onGetBook(routeParams?.id);
-        setBook(items?.data?.[0]);
+        dispatch(fetchBookById(routeParams?.id));
       }
+    } catch (err) {
+      message.error(err, 5);
     }
-    getBooks();
-  }, [routeParams?.id]);
+    return () => {
+      dispatch(cleanBook());
+    };
+  }, [dispatch, routeParams?.id]);
+
   return (
     <div>
       <h2>Название: {book?.name}</h2>

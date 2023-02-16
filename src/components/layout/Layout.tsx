@@ -15,7 +15,9 @@ import { Layout, Menu } from "antd";
 import { PATH_NAMES } from "../../routes/constants";
 import LayoutHeader from "../LayoutHeader/LayoutHeader";
 import { cx } from "../../utils";
+
 const { Content, Sider } = Layout;
+// import logo from "./../../assets/lib-logo.png";
 import "./styles.scss";
 
 type MenuItem = Required<MenuProps>["items"][number];
@@ -78,8 +80,12 @@ const LayoutComponent: React.FC = () => {
             fontSize: 30,
             color: "#ffffff99",
           }}
+          className="library-logo"
         >
-          <Link to={PATH_NAMES.books.base}>Library</Link>
+          <Link to={PATH_NAMES.books.base}>
+            {/*<img src={logo}></img>*/}
+            Library
+          </Link>
         </div>
         <Menu
           theme={themeValue}

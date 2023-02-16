@@ -1,26 +1,28 @@
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
 
-import { Col, Empty, Row } from "antd";
+import { Col, Empty, message, Row } from "antd";
+import { useDispatch, useSelector } from "react-redux";
 
-import { onGetBooks } from "../../api/requests/books";
 import BookCard from "../../components/bookCard/BookCard";
 import { Book } from "../../types/data-contracts";
-import "./styles.scss";
-import LoadingOverlay from "../../components/loadingOverlay";
 import Block from "../../components/block";
+import { AppDispatch, RootState } from "../../store/store";
+import { cleanBooks, fetchBooks } from "../../store/books";
+import "./styles.scss";
 
-function Books() {
-  const [books, setBooks] = useState<Book[]>([]);
-  const [loading, setLoading] = useState<boolean>(false);
+const Books = () => {
+  const { books } = useSelector((state: RootState) => state.books);
+  const dispatch = useDispatch<AppDispatch>();
 
   useEffect(() => {
-    async function getBooks() {
-      setLoading(true);
-      const items = await onGetBooks();
-      setBooks(items?.data?.books);
-      setLoading(false);
+    try {
+      dispatch(fetchBooks());
+    } catch (err) {
+      message.error(err, 5);
     }
-    getBooks();
+    return () => {
+      dispatch(cleanBooks());
+    };
   }, []);
 
   return (
@@ -39,12 +41,12 @@ function Books() {
           ))}
         </Row>
       ) : (
-        <Block hidden={loading}>
+        <Block>
           <Empty />
         </Block>
       )}
-      <LoadingOverlay show={loading} text="Loading..." />
+      {/*<LoadingOverlay show={loading} text="Loading..." />*/}
     </div>
   );
-}
+};
 export default Books;

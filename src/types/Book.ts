@@ -12,9 +12,7 @@
 import { Book } from "./data-contracts";
 import { HttpClient, RequestParams } from "./http-client";
 
-export class Book<
-  SecurityDataType = unknown
-> extends HttpClient<SecurityDataType> {
+export class Book<SecurityDataType = unknown> extends HttpClient<SecurityDataType> {
   /**
    * No description
    *
@@ -26,6 +24,20 @@ export class Book<
     this.request<void, any>({
       path: `/book/`,
       method: "POST",
+      ...params,
+    });
+  /**
+   * No description
+   *
+   * @tags book
+   * @name GetBook
+   * @request GET:/book/{book_id}/
+   */
+  getBook = (bookId: number, params: RequestParams = {}) =>
+    this.request<Book, any>({
+      path: `/book/${bookId}/`,
+      method: "GET",
+      format: "json",
       ...params,
     });
   /**
@@ -52,20 +64,6 @@ export class Book<
     this.request<void, any>({
       path: `/book/${bookId}/`,
       method: "DELETE",
-      ...params,
-    });
-  /**
-   * No description
-   *
-   * @tags book
-   * @name GetBook
-   * @request GET:/book/{book_id}/
-   */
-  getBook = (bookId: number, params: RequestParams = {}) =>
-    this.request<Book, any>({
-      path: `/book/${bookId}/`,
-      method: "GET",
-      format: "json",
       ...params,
     });
 }

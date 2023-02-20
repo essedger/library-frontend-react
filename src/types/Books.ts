@@ -12,20 +12,27 @@
 import { Books } from "./data-contracts";
 import { HttpClient, RequestParams } from "./http-client";
 
-export class Books<
-  SecurityDataType = unknown
-> extends HttpClient<SecurityDataType> {
+export class Books<SecurityDataType = unknown> extends HttpClient<SecurityDataType> {
   /**
    * No description
    *
    * @tags books
-   * @name GetBooks
-   * @request GET:/books/
+   * @name PostBooks
+   * @request POST:/books/
    */
-  getBooks = (params: RequestParams = {}) =>
+  postBooks = (
+    query: {
+      /** Page number is required */
+      page: number;
+      per_page?: number;
+      search?: string;
+    },
+    params: RequestParams = {},
+  ) =>
     this.request<Books, any>({
       path: `/books/`,
-      method: "GET",
+      method: "POST",
+      query: query,
       format: "json",
       ...params,
     });

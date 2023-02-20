@@ -22,15 +22,9 @@ export interface Book {
   name: string;
   /** The author name */
   author?: string;
-  /**
-   * The end reading date
-   * @format date-time
-   */
+  /** The end reading date */
   date_end?: string;
-  /**
-   * The start reading date
-   * @format date-time
-   */
+  /** The start reading date */
   date_start?: string;
   /** The book description */
   description?: string;
@@ -54,4 +48,6 @@ export interface Book {
   source?: string;
   /** The book type */
   type?: string;
+  /** The book genre */
+  genre?: string;
 }

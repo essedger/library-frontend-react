@@ -12,7 +12,9 @@
 import { Books } from "./data-contracts";
 import { HttpClient, RequestParams } from "./http-client";
 
-export class Books<SecurityDataType = unknown> extends HttpClient<SecurityDataType> {
+export class Books<
+  SecurityDataType = unknown
+> extends HttpClient<SecurityDataType> {
   /**
    * No description
    *
@@ -27,7 +29,7 @@ export class Books<SecurityDataType = unknown> extends HttpClient<SecurityDataTy
       per_page?: number;
       search?: string;
     },
-    params: RequestParams = {},
+    params: RequestParams = {}
   ) =>
     this.request<Books, any>({
       path: `/books/`,

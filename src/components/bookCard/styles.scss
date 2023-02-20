@@ -1,9 +1,36 @@
+@import 'src/styles/variables';
+
 .book-card {
   &__img {
-    max-width: 200px;
-    width: 200px;
-    max-height: 310px;
-    height: 310px;
-    border-radius: 8px 8px 0 0;
+    max-width: 210px;
+    width: 210px;
+    max-height: 270px;
+    height: 270px;
+    border-radius: 8px;
+  }
+  &.ant-card.book-card {
+    & .ant-card-body {
+      padding: 0;
+      display: flex;
+      flex-direction: row;
+    }
+  }
+  &.ant-card-bordered {
+    border: none;
+  }
+  &__info {
+    padding: 24px;
+    &-name {
+      font-size: 24px;
+      color: $neutral5
+    }
+    &-author {
+      font-size: 20px;
+      color: $neutral4
+    }
+    &-genre {
+      font-size: 20px;
+      color: $neutral3
+    }
   }
 }

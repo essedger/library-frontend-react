@@ -32,9 +32,9 @@ const Books = () => {
         placeholder="Search by Name and Author"
         allowClear
         enterButton="Search"
-        // value={searchString}
         onSearch={onSearch}
         className="mb_32"
+        size="large"
       />
       <div className="books-page__items">
         {books?.books?.length ? (
@@ -42,10 +42,16 @@ const Books = () => {
             {books?.books?.map((book) => (
               <Col key={book?.id}>
                 <BookCard
-                  image={book?.image}
-                  author={book?.author}
-                  id={book?.id}
                   name={book?.name}
+                  author={book?.author}
+                  image={book?.image}
+                  id={book?.id}
+                  rating={book?.rating}
+                  type={book?.type}
+                  device={book?.device}
+                  description={book?.description}
+                  is_read={book?.is_read}
+                  genre={book?.genre}
                 />
               </Col>
             ))}

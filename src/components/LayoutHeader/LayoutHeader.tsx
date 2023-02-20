@@ -1,17 +1,17 @@
 import React from "react";
 
 import { ArrowLeftOutlined } from "@ant-design/icons";
-
-import "./styles.scss";
 import { Button, Switch } from "antd";
 import { useNavigate } from "react-router-dom";
 
 import { cx } from "../../utils";
+import "./styles.scss";
 
 type LayoutHeaderType = {
   themeValue: string;
   onChangeTheme: (value: boolean) => void;
 };
+
 const LayoutHeader = ({ themeValue, onChangeTheme }: LayoutHeaderType) => {
   const navigate = useNavigate();
   const onBackNavigate = () => {

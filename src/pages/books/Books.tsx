@@ -1,52 +1,71 @@
-import { useEffect } from "react";
+import React, { useState } from "react";
 
-import { Col, Empty, message, Row } from "antd";
-import { useDispatch, useSelector } from "react-redux";
+import { Col, Empty, Pagination, PaginationProps, Row } from "antd";
+import Search from "antd/lib/input/Search";
 
 import BookCard from "../../components/bookCard/BookCard";
-import { Book } from "../../types/data-contracts";
 import Block from "../../components/block";
-import { AppDispatch, RootState } from "../../store/store";
-import { cleanBooks, fetchBooks } from "../../store/books";
+import LoadingOverlay from "../../components/loadingOverlay";
+import { useBooks } from "../../hooks/useBooks";
+
 import "./styles.scss";
 
 const Books = () => {
-  const { books } = useSelector((state: RootState) => state.books);
-  const dispatch = useDispatch<AppDispatch>();
+  const [activePage, setActivePage] = useState(1);
+  const [searchString, setSearchString] = useState<string | undefined>(
+    undefined
+  );
+  const { data: books, isLoading: loading } = useBooks({
+    page: activePage,
+    search: searchString,
+  });
 
-  useEffect(() => {
-    try {
-      dispatch(fetchBooks());
-    } catch (err) {
-      message.error(err, 5);
-    }
-    return () => {
-      dispatch(cleanBooks());
-    };
-  }, []);
-
+  const onChangePage: PaginationProps["onChange"] = (page) => {
+    setActivePage(page);
+  };
+  const onSearch = (searchValue: string) => {
+    setSearchString(searchValue);
+  };
   return (
     <div className="books-page">
-      {books?.length ? (
-        <Row gutter={[24, 24]}>
-          {books?.map((book: Book) => (
-            <Col key={book?.id}>
-              <BookCard
-                image={book?.image}
-                author={book?.author}
-                id={book?.id}
-                name={book?.name}
-              />
-            </Col>
-          ))}
-        </Row>
-      ) : (
-        <Block>
-          <Empty />
-        </Block>
-      )}
-      {/*<LoadingOverlay show={loading} text="Loading..." />*/}
+      <Search
+        placeholder="Search by Name and Author"
+        allowClear
+        enterButton="Search"
+        // value={searchString}
+        onSearch={onSearch}
+        className="mb_32"
+      />
+      <div className="books-page__items">
+        {books?.books?.length ? (
+          <Row gutter={[24, 24]}>
+            {books?.books?.map((book) => (
+              <Col key={book?.id}>
+                <BookCard
+                  image={book?.image}
+                  author={book?.author}
+                  id={book?.id}
+                  name={book?.name}
+                />
+              </Col>
+            ))}
+          </Row>
+        ) : (
+          <Block>
+            <Empty />
+          </Block>
+        )}
+      </div>
+
+      <Pagination
+        onChange={onChangePage}
+        current={activePage}
+        defaultPageSize={8}
+        total={books?.total_pages ? 8 * books?.total_pages : 8}
+      />
+      <LoadingOverlay show={loading} text="Loading..." />
     </div>
   );
 };
+
 export default Books;

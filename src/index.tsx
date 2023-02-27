@@ -1,7 +1,7 @@
 import "./index.scss";
 import "./styles/global-styles.scss";
 
-import React, { StrictMode, Suspense } from "react";
+import React, { Suspense } from "react";
 
 import { QueryClient, QueryClientProvider } from "react-query";
 import { createRoot } from "react-dom/client";
@@ -16,16 +16,14 @@ const root = createRoot(rootElement);
 const queryClient = new QueryClient();
 
 root.render(
-  <StrictMode>
-    <QueryClientProvider client={queryClient}>
-      <Provider store={store}>
-        <Suspense fallback="">
-          <BrowserRouter>
-            <AppRoutes />
-          </BrowserRouter>
-        </Suspense>
-      </Provider>
-      <ReactQueryDevtools initialIsOpen={false} />
-    </QueryClientProvider>
-  </StrictMode>
+  <QueryClientProvider client={queryClient}>
+    <Provider store={store}>
+      <Suspense fallback="">
+        <BrowserRouter>
+          <AppRoutes />
+        </BrowserRouter>
+      </Suspense>
+    </Provider>
+    <ReactQueryDevtools initialIsOpen={false} />
+  </QueryClientProvider>
 );

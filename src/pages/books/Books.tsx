@@ -62,13 +62,15 @@ const Books = () => {
           </Block>
         )}
       </div>
+      <Block hidden={books && books?.books?.length <= 12}>
+        <Pagination
+          onChange={onChangePage}
+          current={activePage}
+          defaultPageSize={8}
+          total={books?.total_pages ? 8 * books?.total_pages : 8}
+        />
+      </Block>
 
-      <Pagination
-        onChange={onChangePage}
-        current={activePage}
-        defaultPageSize={8}
-        total={books?.total_pages ? 8 * books?.total_pages : 8}
-      />
       <LoadingOverlay show={loading} text="Loading..." />
     </div>
   );

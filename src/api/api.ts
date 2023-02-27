@@ -4,7 +4,7 @@ import { setupInterceptorsTo } from "./interceptors";
 
 const getBaseUrl = () => {
   return process.env.NODE_ENV === "development"
-    ? `http://localhost:4000/api/v1/`
+    ? `http://localhost:5005/api/v1/`
     : `${window.location.origin}/api/v1/`;
 };
 

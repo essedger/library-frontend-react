@@ -34,7 +34,7 @@ const onRequestError = async (
 };
 
 const onResponse = (response: AxiosResponse): AxiosResponse => {
-  return response?.data;
+  return response;
 };
 
 const onResponseError = async (
@@ -47,7 +47,7 @@ const onResponseError = async (
 export const setupInterceptorsTo = (
   axiosInstance: AxiosInstance
 ): AxiosInstance => {
-  // axiosInstance.interceptors.request.use(onRequest, onRequestError);
-  // axiosInstance.interceptors.response.use(onResponse, onResponseError);
+  axiosInstance.interceptors.request.use(onRequest, onRequestError);
+  axiosInstance.interceptors.response.use(onResponse, onResponseError);
   return axiosInstance;
 };

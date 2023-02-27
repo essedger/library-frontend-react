@@ -11,7 +11,7 @@ export const useBooks = ({
   return useQuery<BooksResponse>(
     ["books", page, search],
     async () => {
-      const response = await onGetBooks({ page: page, search, per_page });
+      const response = await onGetBooks({ page, search, per_page });
       return response.data;
     },
     // This tells React-Query that this is Query is part of

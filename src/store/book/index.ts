@@ -29,7 +29,6 @@ export const booksSlice = createSlice({
     },
   },
   extraReducers: (builder) => {
-    // Add reducers for additional action types here, and handle loading state as needed
     builder.addCase(fetchBookById.fulfilled, (state, action) => {
       // Add books to the state array
       state.book = action.payload?.[0];
@@ -37,7 +36,6 @@ export const booksSlice = createSlice({
   },
 });
 
-// Action creators are generated for each case reducer function
 export const { cleanBook } = booksSlice.actions;
 
 export default booksSlice.reducer;

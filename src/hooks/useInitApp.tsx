@@ -5,11 +5,18 @@ import { useLocation, useNavigate } from "react-router-dom";
 // import i18n from "../i18n";
 import { localStorageService } from "../services/localStorageService";
 import { PATH_NAMES } from "../routes/constants";
+import { onGetMe } from "../api/requests/auth";
+
+import { useAppDispatch, useAppSelector } from "./reduxHooks";
+import { setAuth } from "../store/auth";
 
 const UseInitApp = () => {
   const navigate = useNavigate();
   const location = useLocation();
-  //set initial lang
+  const me = useAppSelector((state) => state.me);
+  const dispatch = useAppDispatch();
+  console.log(me);
+  //Set initial lang
   // useEffect(() => {
   //   if (process.env.REACT_APP_LANG) {
   //     i18n.changeLanguage(process.env.REACT_APP_LANG);
@@ -17,7 +24,7 @@ const UseInitApp = () => {
   // }, []);
   const checkPath = useCallback(() => {
     const authData = localStorageService.getAuthData();
-
+    //Authorized users
     if (authData) {
       if (
         location.pathname === PATH_NAMES.auth.login ||
@@ -26,7 +33,8 @@ const UseInitApp = () => {
       ) {
         navigate(PATH_NAMES.books.base);
       }
-    } else {
+      //Not authorized users
+    } else if (location.pathname !== PATH_NAMES.auth.signup) {
       navigate(PATH_NAMES.auth.login);
     }
   }, [location.pathname, navigate]);
@@ -34,6 +42,27 @@ const UseInitApp = () => {
   useEffect(() => {
     checkPath();
   }, [checkPath]);
+
+  const checkMeData = useCallback(async () => {
+    const authData = localStorageService.getAuthData();
+    console.log(me?.me);
+    //Authorized users
+    if (authData && !me?.me) {
+      try {
+        const userData = await onGetMe();
+        // console.log(userData);
+        if (userData?.data?.user) {
+          dispatch(setAuth(userData?.data?.user))
+        }
+        console.log(userData?.data?.user);
+      } catch (e) {
+        console.log(e);
+      }
+    }
+  }, [me]);
+  useEffect(() => {
+    checkMeData();
+  }, [me, checkMeData]);
 };
 
 export default UseInitApp;

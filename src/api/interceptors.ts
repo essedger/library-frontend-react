@@ -13,11 +13,9 @@ import { localStorageService } from "../services/localStorageService";
 
 const onRequest = (config: AxiosRequestConfig): AxiosRequestConfig => {
   const authData = localStorageService.getAuthData();
-
   if (authData && config?.headers) {
-    config.headers.Authorization = `Bearer ${authData.access}`;
+    config.headers.Authorization = `Bearer ${authData}`;
   }
-
   return config;
 };
 
@@ -26,7 +24,7 @@ const onRequestError = async (
 ): Promise<AxiosResponse<any, any>> => {
   const notification = {
     type: NotificationType.error,
-    description: `${error.response?.data || "Something went wrond"}`,
+    description: `${error.response?.data || "Something went wrong"}`,
   };
   notificationService.show(notification);
 

@@ -16,6 +16,8 @@ export interface ITextField extends MergedProps {
   type?: TextFieldTypeEnum;
   noForm?: boolean;
   ref?: any;
+  hasFeedback?: boolean;
+  dependencies?: string[] | number[];
 }
 
 export enum TextFieldTypeEnum {

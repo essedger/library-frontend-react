@@ -2,9 +2,11 @@ import React from "react";
 
 import { ArrowLeftOutlined } from "@ant-design/icons";
 import { Button, Switch } from "antd";
-import { useNavigate } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 
 import { cx } from "../../utils";
+import Block from "../block";
+import { PATH_NAMES } from "../../routes/constants";
 import "./styles.scss";
 
 type LayoutHeaderType = {
@@ -14,10 +16,10 @@ type LayoutHeaderType = {
 
 const LayoutHeader = ({ themeValue, onChangeTheme }: LayoutHeaderType) => {
   const navigate = useNavigate();
+  const location = useLocation();
   const onBackNavigate = () => {
     navigate(-1);
   };
-
   const className = cx("layout-header", {
     "layout-header__dark": themeValue === "dark",
     "layout-header__light": themeValue === "light",
@@ -25,11 +27,13 @@ const LayoutHeader = ({ themeValue, onChangeTheme }: LayoutHeaderType) => {
   return (
     <div className={className}>
       <div>
-        <Button
-          onClick={onBackNavigate}
-          shape="circle"
-          icon={<ArrowLeftOutlined />}
-        />
+        <Block hidden={location.pathname === PATH_NAMES.books.base}>
+          <Button
+            onClick={onBackNavigate}
+            shape="circle"
+            icon={<ArrowLeftOutlined />}
+          />
+        </Block>
       </div>
       <div>
         <Switch

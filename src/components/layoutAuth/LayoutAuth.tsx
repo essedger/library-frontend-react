@@ -22,6 +22,8 @@ const { Content, Sider } = Layout;
 
 import { localStorageService } from "../../services/localStorageService";
 import "./styles.scss";
+import { useAppDispatch } from "../../hooks/reduxHooks";
+import { removeAuth } from "../../store/auth";
 
 type MenuItem = Required<MenuProps>["items"][number];
 
@@ -51,6 +53,7 @@ const items: MenuItem[] = [
 
 const LayoutComponent: React.FC = () => {
   const navigate = useNavigate();
+  const dispatch = useAppDispatch();
   // const [collapsed, setCollapsed] = useState(false);
   const [themeValue, setThemeValue] = useState<MenuTheme>("dark");
   const [current, setCurrent] = useState("books");
@@ -65,6 +68,7 @@ const LayoutComponent: React.FC = () => {
   const onClick: MenuProps["onClick"] = (e) => {
     if (e.key === "logout") {
       localStorageService.removeAuthData();
+      dispatch(removeAuth())
       navigate(PATH_NAMES.auth.login);
     } else {
       setCurrent(e.key);

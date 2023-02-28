@@ -33,6 +33,8 @@ function TextField({
   type,
   noForm,
   normalize,
+  dependencies,
+  hasFeedback,
   ...props
 }: ITextField) {
   const classNames = cx("lib-text-field", className, {
@@ -71,6 +73,8 @@ function TextField({
       labelAlign="left"
       rules={rules}
       normalize={normalize}
+      dependencies={dependencies}
+      hasFeedback={hasFeedback}
     >
       <Component {...props} autoComplete="off" />
     </Form.Item>

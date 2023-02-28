@@ -1,9 +1,8 @@
-import API from "api/api";
-import { ENDPOINTS } from "api/constants";
+import { ILogin } from "../../types/entities/auth";
+import API from "../api";
+import { ENDPOINTS } from "../constants";
 
-type LoginPayload = {
-  email: string;
-  password: string;
-};
-export const onLogin = (payload: LoginPayload): Promise<any> =>
+export const onLogin = (payload: ILogin): Promise<any> =>
+  API().post(ENDPOINTS.LOGIN, payload);
+export const onRegister = (payload: ILogin): Promise<any> =>
   API().post(ENDPOINTS.LOGIN, payload);

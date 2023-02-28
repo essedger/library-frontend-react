@@ -37,11 +37,19 @@ const onResponse = (response: AxiosResponse): AxiosResponse => {
   return response;
 };
 
+interface IErrorResponse<T> extends AxiosResponse<T> {
+  message: string;
+}
 const onResponseError = async (
-  error: AxiosError
+  error: AxiosError<IErrorResponse<any>>
 ): Promise<AxiosResponse<any, any>> => {
-  message.error("Something went wrong", messageDurability);
-  return Promise.reject(error.response);
+  if (error?.response?.data?.message) {
+    message.error(error?.response?.data?.message, messageDurability);
+    return Promise.reject(error.response);
+  } else {
+    message.error("Something went wrong", messageDurability);
+    return Promise.reject(error.response);
+  }
 };
 
 export const setupInterceptorsTo = (

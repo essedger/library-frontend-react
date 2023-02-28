@@ -1,0 +1,24 @@
+@import "src/styles/mixins";
+@import "src/styles/variables";
+
+.main-layout {
+  & .layout-content {
+    padding: 32px;
+    min-height: calc(100vh - 64px);
+    overflow-y: auto;
+    @include scrollSmall();
+    &__light {
+      background: #ffffff;
+    }
+    &__dark {
+      background: #E9E9E9;
+    }
+  }
+  //& .library-logo {
+  //  & img {
+  //    width: 30px;
+  //    height: 30px;
+  //    margin-right: 8px;
+  //  }
+  //}
+}

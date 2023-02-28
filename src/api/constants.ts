@@ -1,10 +1,10 @@
 export const ENDPOINTS = {
   //Auth
   LOGIN: "login/",
-  SIGNUP: "signup/",
+  SIGNUP: "register/",
   RESET_PASSWORD: "password-reset/",
   //Books
   BOOK: (bookId: string) => `/book/${bookId}/`,
   ADD_ITEM: "book/",
-  BOOKS: "books/",
+  BOOKS: "book/",
 };

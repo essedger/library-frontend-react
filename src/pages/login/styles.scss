@@ -1,0 +1,17 @@
+@import "src/styles/mixins";
+@import "src/styles/variables";
+
+.login-page {
+  &__form {
+    display: flex;
+    flex-direction: column;
+    border: 1px $neutral3 solid;
+    border-radius: 8px;
+    padding: 32px;
+    width: 360px;
+    & .lib-button {
+      width: 100%;
+    }
+  }
+
+}

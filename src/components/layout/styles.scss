@@ -1,12 +1,22 @@
 @import "src/styles/mixins";
 @import "src/styles/variables";
 
-.main-layout {
+.not-auth-layout {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  & .ant-layout-content {
+    width: 100%;
+  }
   & .layout-content {
+    display: flex;
     padding: 32px;
-    min-height: calc(100vh - 64px);
-    overflow-y: auto;
-    @include scrollSmall();
+    min-height: 100vh;
+    overflow-y: hidden;
+    width: 100%;
+    align-items: center;
+    justify-content: center;
     &__light {
       background: #ffffff;
     }
@@ -14,11 +24,4 @@
       background: #E9E9E9;
     }
   }
-  //& .library-logo {
-  //  & img {
-  //    width: 30px;
-  //    height: 30px;
-  //    margin-right: 8px;
-  //  }
-  //}
 }

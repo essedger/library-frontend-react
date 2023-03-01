@@ -1,11 +1,24 @@
+import React, { MouseEvent } from "react";
+
 import { Card, Rate } from "antd";
 import { Link } from "react-router-dom";
 
-import { Book } from "../../types/data-contracts";
 import { PATH_NAMES } from "../../routes/constants";
-import { getBookTypeIcon } from "../../utils/icons";
-import Block from "../block";
+// import { getBookTypeIcon } from "../../utils/icons";
+import Button from "../button";
+import { ButtonTypesEnum } from "../button/types";
+import { IBook } from "../../types/entities";
+import {
+  onAddBookToFavorites,
+  onDeleteBookFromFavorites,
+} from "../../api/requests/books";
+import { useAppSelector } from "../../hooks/reduxHooks";
 import "./styles.scss";
+
+interface IBookCard extends IBook {
+  refetch: any;
+  loading?: boolean;
+}
 
 const BookCard = ({
   image,
@@ -14,16 +27,45 @@ const BookCard = ({
   id,
   genre,
   rating,
-  type,
+  // type,
   device,
-}: Book) => {
+  year,
+  favoritedBy,
+  refetch,
+}: IBookCard) => {
+  const { me } = useAppSelector((state) => state?.me);
+  const isBookInFavoritesForCurrentUser = favoritedBy?.some(
+    (userId) => userId?.id === me?.id
+  );
+  const addToFavorites = async (
+    e: MouseEvent<HTMLButtonElement | HTMLAnchorElement>
+  ) => {
+    e.stopPropagation();
+    e.preventDefault();
+    if (id) {
+      if (isBookInFavoritesForCurrentUser) {
+        await onDeleteBookFromFavorites(id);
+        await refetch();
+      } else {
+        await onAddBookToFavorites(id);
+        await refetch();
+      }
+    }
+  };
+  const getFavoritesButtonName = () => {
+    if (isBookInFavoritesForCurrentUser) {
+      return "Remove from favorites";
+    } else {
+      return "Add to favorites";
+    }
+  };
   return (
-    <Link to={`${PATH_NAMES.book.base}`.replace(":id", `${id}`)}>
+    <Link to={`${PATH_NAMES.book.base}`.replace(":bookId", `${id}`)}>
       <Card
         key={id}
-        className="book-card mr_16"
+        className="book-card"
         hoverable
-        style={{ width: 515, height: 270 }}
+        style={{ width: 400, height: 200 }}
       >
         <div className="book-card__img-container">
           <img className="book-card__img" alt="example" src={image} />
@@ -33,12 +75,18 @@ const BookCard = ({
           <div className="book-card__info-author">{author}</div>
           <div className="book-card__info-genre">{genre}</div>
           <div className="book-card__info-rating">
-            <Rate allowHalf defaultValue={rating} />
+            <Rate allowHalf defaultValue={rating} disabled />
           </div>
-          <Block hidden={!type} className="book-card__info-type">
-            {getBookTypeIcon(type)}
-          </Block>
-          <div className="book-card__info-device">{device}</div>
+          <div className="book-card__info-year">Year: {year}</div>
+          {/*<div className="book-card__info-type">*/}
+          {/*  Device: {getBookTypeIcon(type)}*/}
+          {/*</div>*/}
+          <div className="book-card__info-device mb_8">{device}</div>
+          <div>
+            <Button type={ButtonTypesEnum.primary} onClick={addToFavorites}>
+              {getFavoritesButtonName()}
+            </Button>
+          </div>
         </div>
       </Card>
     </Link>

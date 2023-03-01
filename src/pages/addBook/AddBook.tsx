@@ -9,8 +9,8 @@ import { ButtonTypesEnum } from "../../components/button/types";
 import { showMessage } from "../../components/message/message";
 import DatePicker from "../../components/datePicker";
 import Checkbox from "../../components/checkbox";
+import { IBook } from "../../types/entities";
 import "./styles.scss";
-import { Book } from "../../types/data-contracts";
 
 const AddBookPage = () => {
   // const routeParams = useParams();
@@ -47,7 +47,7 @@ const AddBookPage = () => {
   };
 
   const onFormValuesChange = () => {};
-  const onSubmit = async (values: Book) => {
+  const onSubmit = async (values: IBook) => {
     const sendValues = {
       ...values,
       date_start: dateStart,

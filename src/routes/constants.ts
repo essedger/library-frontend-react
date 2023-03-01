@@ -6,7 +6,7 @@ export const PATH_NAMES: Record<string, any> = {
     linkSent: "/link-sent",
   },
   book: {
-    base: "/book/:id",
+    base: "/book/:bookId",
     addBook: "/add",
   },
   add: {

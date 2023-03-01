@@ -7,9 +7,10 @@ import Block from "../../components/block";
 import { useBook } from "../../hooks/useBook";
 import LoadingOverlay from "../../components/loadingOverlay";
 import "./styles.scss";
+
 const BookPage = () => {
   const routeParams = useParams();
-  const { data: book, isLoading: loading } = useBook(routeParams?.id);
+  const { data: book, isLoading: loading } = useBook(routeParams?.bookId);
   return (
     <>
       <Block className="book-page" hidden={!book}>

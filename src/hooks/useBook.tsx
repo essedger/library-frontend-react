@@ -1,10 +1,10 @@
 import { useQuery } from "react-query";
 
 import { onGetBook } from "../api/requests/books";
-import { Book } from "../types/data-contracts";
+import { IBook } from "../types/entities";
 
 export const useBook = (bookId = "") => {
-  return useQuery<Book>(
+  return useQuery<IBook>(
     ["book", bookId],
     async () => {
       const response = await onGetBook(bookId);

@@ -25,6 +25,7 @@ function AppRoutes() {
       </Route>
       <Route element={<LayoutAuthorized />}>
         <Route path={PATH_NAMES.books.base} element={<Books />} />
+        <Route path={PATH_NAMES.favorites.base} element={<Books />} />
         <Route path={PATH_NAMES.book.base} element={<BookPage />} />
         <Route path={PATH_NAMES.add.base} element={<AddBookPage />} />
       </Route>

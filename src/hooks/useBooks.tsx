@@ -9,9 +9,14 @@ export const useBooks = ({
   search,
 }: BooksRequest) => {
   return useQuery<BooksResponse>(
-    ["books", page, search],
+    ["books", page, search, per_page],
     async () => {
-      const response = await onGetBooks({ page, search, per_page });
+      const params = {
+        page: page,
+        per_page: per_page,
+        search: search?.length ? search : undefined,
+      };
+      const response = await onGetBooks(params);
       return response.data;
     },
     // This tells React-Query that this is Query is part of

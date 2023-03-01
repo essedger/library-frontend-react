@@ -13,6 +13,7 @@
   },
   "dependencies": {
     "@reduxjs/toolkit": "^1.9.2",
+    "@types/qs": "^6.9.7",
     "antd": "^5.1.6",
     "antd-dayjs-vite-plugin": "^1.2.2",
     "axios": "^1.2.3",
@@ -21,6 +22,7 @@
     "i18next": "^22.4.9",
     "i18next-browser-languagedetector": "^7.0.1",
     "i18next-http-backend": "^2.1.1",
+    "qs": "^6.11.0",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
     "react-i18next": "^12.1.4",

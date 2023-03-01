@@ -15,7 +15,11 @@ const Books = () => {
   const [searchString, setSearchString] = useState<string | undefined>(
     undefined
   );
-  const { data: books, isLoading: loading } = useBooks({
+  const {
+    data: books,
+    isLoading: loading,
+    refetch,
+  } = useBooks({
     page: activePage,
     search: searchString,
   });
@@ -29,7 +33,7 @@ const Books = () => {
   return (
     <div className="books-page">
       <Search
-        placeholder="Search by Name and Author"
+        placeholder="Search by Name or Author"
         allowClear
         enterButton="Search"
         onSearch={onSearch}
@@ -38,21 +42,10 @@ const Books = () => {
       />
       <div className="books-page__items">
         {books?.books?.length ? (
-          <Row gutter={[24, 24]}>
+          <Row gutter={[20, 20]}>
             {books?.books?.map((book) => (
               <Col key={book?.id}>
-                <BookCard
-                  name={book?.name}
-                  author={book?.author}
-                  image={book?.image}
-                  id={book?.id}
-                  rating={book?.rating}
-                  type={book?.type}
-                  device={book?.device}
-                  description={book?.description}
-                  is_read={book?.is_read}
-                  genre={book?.genre}
-                />
+                <BookCard refetch={refetch} {...book} />
               </Col>
             ))}
           </Row>
@@ -62,12 +55,12 @@ const Books = () => {
           </Block>
         )}
       </div>
-      <Block hidden={books && books?.books?.length <= 12}>
+      <Block hidden={books && books.totalBooks < 12} className="mt_24">
         <Pagination
           onChange={onChangePage}
           current={activePage}
-          defaultPageSize={8}
-          total={books?.total_pages ? 8 * books?.total_pages : 8}
+          defaultPageSize={12}
+          total={books && books.totalBooks}
         />
       </Block>
 

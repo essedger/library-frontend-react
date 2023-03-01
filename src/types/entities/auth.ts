@@ -20,5 +20,6 @@ export interface IUser {
   phone?: string;
   country?: string;
   city?: string;
+  favorite_books?: string[];
   roles: IRole[];
 }

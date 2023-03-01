@@ -1,4 +1,5 @@
 import axios, { AxiosRequestConfig, AxiosResponse } from "axios";
+import qs from "qs";
 
 import { setupInterceptorsTo } from "./interceptors";
 
@@ -26,12 +27,22 @@ const API = () => {
   return {
     get: <P, R>(
       url: string,
-      config?: AxiosRequestConfig,
-      params?: P
-    ): Promise<AxiosResponse<any> | R> =>
-      instance
-        .get(url, { params, responseType: "json", ...config })
-        .then((data) => data),
+      params?: P,
+      config?: AxiosRequestConfig
+    ): Promise<AxiosResponse<any> | R> => {
+      return instance
+        .get(url, {
+          ...params,
+          paramsSerializer: {
+            serialize: (param) => {
+              return qs.stringify(param, { arrayFormat: "repeat" });
+            },
+          },
+          responseType: "json",
+          ...config,
+        })
+        .then((data) => data);
+    },
     post: <D, R>(
       url: string,
       payload?: D,

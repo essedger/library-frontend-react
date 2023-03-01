@@ -6,16 +6,15 @@ import { useLocation, useNavigate } from "react-router-dom";
 import { localStorageService } from "../services/localStorageService";
 import { PATH_NAMES } from "../routes/constants";
 import { onGetMe } from "../api/requests/auth";
+import { setAuth } from "../store/auth";
 
 import { useAppDispatch, useAppSelector } from "./reduxHooks";
-import { setAuth } from "../store/auth";
 
 const UseInitApp = () => {
   const navigate = useNavigate();
   const location = useLocation();
   const me = useAppSelector((state) => state.me);
   const dispatch = useAppDispatch();
-  console.log(me);
   //Set initial lang
   // useEffect(() => {
   //   if (process.env.REACT_APP_LANG) {
@@ -45,21 +44,19 @@ const UseInitApp = () => {
 
   const checkMeData = useCallback(async () => {
     const authData = localStorageService.getAuthData();
-    console.log(me?.me);
     //Authorized users
     if (authData && !me?.me) {
       try {
         const userData = await onGetMe();
         // console.log(userData);
         if (userData?.data?.user) {
-          dispatch(setAuth(userData?.data?.user))
+          dispatch(setAuth(userData?.data?.user));
         }
-        console.log(userData?.data?.user);
       } catch (e) {
         console.log(e);
       }
     }
-  }, [me]);
+  }, [dispatch, me]);
   useEffect(() => {
     checkMeData();
   }, [me, checkMeData]);

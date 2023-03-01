@@ -2,10 +2,10 @@
 
 .book-card {
   &__img {
-    max-width: 210px;
-    width: 210px;
-    max-height: 270px;
-    height: 270px;
+    //max-width: 210px;
+    //width: 210px;
+    max-height: 200px;
+    height: 200px;
     border-radius: 8px;
   }
   &.ant-card.book-card {
@@ -19,17 +19,18 @@
     border: none;
   }
   &__info {
-    padding: 24px;
+    padding: 16px;
     &-name {
-      font-size: 24px;
+      font-size: 18px;
       color: $neutral5
     }
     &-author {
-      font-size: 20px;
+      font-size: 14px;
       color: $neutral4
     }
-    &-genre {
-      font-size: 20px;
+    &-genre,
+    &-year {
+      font-size: 14px;
       color: $neutral3
     }
   }

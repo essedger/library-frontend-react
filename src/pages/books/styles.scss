@@ -11,5 +11,7 @@
     margin-bottom: 16px;
     width: 100%;
   }
-  //height: calc(100vh - 128px);
+  &__empty {
+    width: 100%;
+  }
 }

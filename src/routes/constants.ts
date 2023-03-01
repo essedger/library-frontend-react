@@ -18,4 +18,10 @@ export const PATH_NAMES: Record<string, any> = {
   favorites: {
     base: "/favorites",
   },
+  progress: {
+    base: "/progress",
+  },
+  finished: {
+    base: "/finished",
+  },
 };

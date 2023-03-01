@@ -11,6 +11,8 @@ export interface BooksRequest {
   page: number;
   per_page?: number;
   search?: string;
+  fav?: string;
+  period?: string;
 }
 
 export interface IBook {

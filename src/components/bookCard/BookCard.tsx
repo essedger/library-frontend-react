@@ -77,7 +77,7 @@ const BookCard = ({
           <div className="book-card__info-rating">
             <Rate allowHalf defaultValue={rating} disabled />
           </div>
-          <div className="book-card__info-year">Year: {year}</div>
+          <div className="book-card__info-year">{year && `Year: ${year}`}</div>
           {/*<div className="book-card__info-type">*/}
           {/*  Device: {getBookTypeIcon(type)}*/}
           {/*</div>*/}

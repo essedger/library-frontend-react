@@ -25,8 +25,8 @@ const Login = () => {
     }
   };
   const onSignUp = () => {
-    navigate(PATH_NAMES.auth.signup)
-  }
+    navigate(PATH_NAMES.auth.signup);
+  };
   return (
     <div className="login-page">
       <div className="login-page__form">
@@ -48,7 +48,9 @@ const Login = () => {
             Login
           </Button>
         </Form>
-        <Button type={ButtonTypesEnum.link} onClick={onSignUp}>Sign up</Button>
+        <Button type={ButtonTypesEnum.link} onClick={onSignUp}>
+          Sign up
+        </Button>
       </div>
     </div>
   );

@@ -9,6 +9,7 @@ import {
   UserOutlined,
   PlusOutlined,
   LogoutOutlined,
+  CheckCircleOutlined,
 } from "@ant-design/icons";
 import type { MenuProps, MenuTheme } from "antd";
 import { Layout, Menu } from "antd";
@@ -44,8 +45,9 @@ function getItem(
 const items: MenuItem[] = [
   getItem("My Books", "books", <SolutionOutlined />),
   getItem("Favorites", "favorites", <BookOutlined />),
-  getItem("In progress", "now", <PlayCircleOutlined />),
-  getItem("Scheduled", "scheduled", <CalendarOutlined />),
+  getItem("In progress", "progress", <PlayCircleOutlined />),
+  getItem("Finished", "finished", <CheckCircleOutlined />),
+  // getItem("Scheduled", "scheduled", <CalendarOutlined />),
   getItem("Profile", "profile", <UserOutlined />),
   getItem("Add Book", "add", <PlusOutlined />),
   getItem("Logout", "logout", <LogoutOutlined />),
@@ -68,7 +70,7 @@ const LayoutComponent: React.FC = () => {
   const onClick: MenuProps["onClick"] = (e) => {
     if (e.key === "logout") {
       localStorageService.removeAuthData();
-      dispatch(removeAuth())
+      dispatch(removeAuth());
       navigate(PATH_NAMES.auth.login);
     } else {
       setCurrent(e.key);

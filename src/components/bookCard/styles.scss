@@ -28,10 +28,14 @@
       font-size: 14px;
       color: $neutral4
     }
-    &-genre,
+    &-genre {
+      font-size: 14px;
+      color: $neutral3;
+    }
     &-year {
       font-size: 14px;
-      color: $neutral3
+      color: $neutral3;
+      height: 22px;
     }
   }
 }

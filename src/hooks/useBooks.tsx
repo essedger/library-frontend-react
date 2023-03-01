@@ -7,14 +7,18 @@ export const useBooks = ({
   page: page,
   per_page = 12,
   search,
+  fav,
+  period,
 }: BooksRequest) => {
   return useQuery<BooksResponse>(
-    ["books", page, search, per_page],
+    ["books", page, search, per_page, fav, period],
     async () => {
       const params = {
         page: page,
         per_page: per_page,
         search: search?.length ? search : undefined,
+        fav: fav,
+        period,
       };
       const response = await onGetBooks(params);
       return response.data;

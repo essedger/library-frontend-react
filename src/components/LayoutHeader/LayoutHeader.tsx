@@ -24,10 +24,11 @@ const LayoutHeader = ({ themeValue, onChangeTheme }: LayoutHeaderType) => {
     "layout-header__dark": themeValue === "dark",
     "layout-header__light": themeValue === "light",
   });
+  console.log(location);
   return (
     <div className={className}>
       <div>
-        <Block hidden={location.pathname === PATH_NAMES.books.base}>
+        <Block hidden={!location.pathname.includes("/book/")}>
           <Button
             onClick={onBackNavigate}
             shape="circle"

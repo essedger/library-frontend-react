@@ -8,12 +8,16 @@ import Button from "../../components/button";
 import { ButtonTypesEnum } from "../../components/button/types";
 import { showMessage } from "../../components/message/message";
 import DatePicker from "../../components/datePicker";
-import Checkbox from "../../components/checkbox";
 import { IBook } from "../../types/entities";
+import Select from "../../components/select";
+import {
+  bookDeviceSelectOptions,
+  bookTypesSelectOptions,
+  langArrayOptions,
+} from "../../constants";
 import "./styles.scss";
 
 const AddBookPage = () => {
-  // const routeParams = useParams();
   const [dateStart, setDateStart] = useState("");
   const [dateEnd, setDateEnd] = useState("");
   const [isFinished, setIsFinished] = useState(false);
@@ -75,7 +79,7 @@ const AddBookPage = () => {
   };
   return (
     <div className="add-book-page">
-      New book
+      <h1>Create new book</h1>
       <Form
         form={form}
         layout="vertical"
@@ -101,35 +105,83 @@ const AddBookPage = () => {
           label="Description"
           placeholder="Description"
         />
-        <DatePicker
-          name="date_start"
-          label="Start date"
-          placeholder="Start date"
-          onChange={onChangeDateStart}
-        />
-        <DatePicker
-          name="date_end"
-          label="Finish date"
-          placeholder="Finish date"
-          onChange={onChangeDateEnd}
-        />
-        <TextField name="device" label="Device" placeholder="Device" />
+        <div className="flex-align-items--center flex-row">
+          <DatePicker
+            name="date_start"
+            label="Start date"
+            placeholder="Start date"
+            onChange={onChangeDateStart}
+            className="mr_8"
+          />
+          <DatePicker
+            name="date_end"
+            label="Finish date"
+            placeholder="Finish date"
+            onChange={onChangeDateEnd}
+            className="mr_8"
+          />
+          <DatePicker
+            name="schedule"
+            label="Read schedule date"
+            placeholder="Schedule date"
+            onChange={onChangeScheduleDate}
+            className="mr_8"
+          />
+        </div>
         <TextField name="image" label="Image URL" placeholder="Image URL" />
-        <Checkbox
-          name="is_read"
-          label="Finished?"
-          onChange={onChangeIsFinished}
-          checked={isFinished}
+        <Select
+          name="language"
+          label="Language"
+          placeholder="Language"
+          options={langArrayOptions}
+          optionFilterProp="label"
+          showSearch
         />
-        <TextField name="link" label="Book link" placeholder="Book link" />
-        <DatePicker
-          name="schedule"
-          label="Schedule date"
-          placeholder="Schedule date"
-          onChange={onChangeScheduleDate}
+        <TextField
+          name="year"
+          label="Year"
+          placeholder="Year"
+          rules={[
+            {
+              message: "Please year by numbers",
+            },
+            () => ({
+              validator(_, value) {
+                if (!value) {
+                  return Promise.reject();
+                }
+                if (isNaN(value)) {
+                  return Promise.reject("Year has to be a number.");
+                }
+                if (value.length < 4) {
+                  return Promise.reject("Year can't be less than 4 digits");
+                }
+                if (value.length > 4) {
+                  return Promise.reject("Year can't be more than 4 digits");
+                }
+                return Promise.resolve();
+              },
+            }),
+          ]}
         />
-        <TextField name="source" label="Source" placeholder="Source" />
-        <TextField name="type" label="Type" placeholder="Type" />
+        <TextField
+          name="link"
+          label="Book purchase link"
+          placeholder="Book purchase link"
+        />
+        <TextField name="source" label="Link to file" placeholder="Link" />
+        <Select
+          name="type"
+          label="Type"
+          placeholder="Type"
+          options={bookTypesSelectOptions}
+        />
+        <Select
+          name="device"
+          label="Device"
+          placeholder="Device"
+          options={bookDeviceSelectOptions}
+        />
         <TextField name="notes" label="Notes" placeholder="Notes" />
         <Form.Item>
           <Button htmlType="submit" type={ButtonTypesEnum.primary}>

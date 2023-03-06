@@ -46,7 +46,7 @@ const API = () => {
     post: <D, R>(
       url: string,
       payload?: D,
-      config?: AxiosRequestConfig
+      config?: any
     ): Promise<AxiosResponse<any> | R> =>
       instance.post(url, payload, config).then((data) => data),
     patch: <D, R>(

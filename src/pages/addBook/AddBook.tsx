@@ -16,6 +16,7 @@ import {
   langArrayOptions,
 } from "../../constants";
 import "./styles.scss";
+import ImageUpload from "../../components/imageUpload";
 
 const AddBookPage = () => {
   const [dateStart, setDateStart] = useState("");
@@ -46,9 +47,6 @@ const AddBookPage = () => {
       setDateEnd("");
     }
   };
-  const onChangeIsFinished = () => {
-    setIsFinished(!isFinished);
-  };
 
   const onFormValuesChange = () => {};
   const onSubmit = async (values: IBook) => {
@@ -59,7 +57,6 @@ const AddBookPage = () => {
       schedule: scheduleDate,
       is_read: isFinished,
     };
-    // console.warn(sendValues);
     try {
       await onPostItem(sendValues).then(() => {
         form.resetFields();
@@ -80,6 +77,7 @@ const AddBookPage = () => {
   return (
     <div className="add-book-page">
       <h1>Create new book</h1>
+      <ImageUpload type="book" entityId="63ff724e36b5a9677e922139" />
       <Form
         form={form}
         layout="vertical"

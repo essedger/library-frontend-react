@@ -7,6 +7,7 @@ export const ENDPOINTS = {
   //Books
   BOOK: (bookId: string) => `/book/${bookId}/`,
   ADD_ITEM: "book/",
+  UPLOAD_IMAGE: "upload/",
   BOOKS: "book/",
   ADD_FAVORITES: (bookId: number) => `/book/${bookId}/favorites/add`,
   DELETE_FAVORITES: (bookId: number) => `/book/${bookId}/favorites/delete`,

@@ -68,7 +68,7 @@ const BookCard = ({
         style={{ width: 400, height: 200 }}
       >
         <div className="book-card__img-container">
-          <img className="book-card__img" alt="example" src={image} />
+          <img className="book-card__img" alt="book cover" src={image} />
         </div>
         <div className="book-card__info">
           <div className="book-card__info-name">{name}</div>
